@@ -32,12 +32,20 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function getPlayerChoice() {
-	return window.prompt("choose" + " " + options);
+	let validateChoice = false;
+	while (!validateChoice) {
+		const choice = prompt("Please choose rock, paper, or scissors");
+		if (choice == null) {
+			continue;
+		}
+		const choiceInLower = choice.toLowerCase();
+		if (options.includes(choiceInLower)) return choiceInLower;
+	}
 }
 getPlayerChoice();
 function game() {
 	for (let i = 0; i < 5; i++) {
-		const playerSelection = "rock";
+		const playerSelection = getPlayerChoice();
 		const computerSelection = computerPlay();
 		console.log(playRound(playerSelection, computerSelection));
 	}
